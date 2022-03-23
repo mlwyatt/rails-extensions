@@ -1,0 +1,161 @@
+AllCops:
+  NewCops: disable
+  TargetRubyVersion: 3.0.1
+  SuggestExtensions: false
+  StyleGuideBaseURL: https://github.com/BrandsInsurance/expert-chainsaw/blob/master/ruby/RUBY_STYLE_GUIDE.adoc
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/ClassStructure:
+  Categories:
+    module_inclusion:
+      - prepend
+      - extend
+      - include
+
+Layout/FirstArgumentIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle:
+    - key
+    - table
+  EnforcedColonStyle:
+    - key
+    - table
+  EnforcedLastArgumentHashStyle: ignore_explicit
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_first_parameter
+
+Layout/SpaceBeforeFirstArg:
+  AllowForAlignment: false
+
+Layout/SpaceInLambdaLiteral:
+  EnforcedStyle: require_space
+
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: false
+
+Lint/Debugger:
+  Enabled: true
+
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+  Max: 250
+
+Metrics/BlockLength:
+  Max: 500
+  CountAsOne:
+    - 'array'
+    - 'heredoc'
+    - 'hash'
+
+Metrics/BlockNesting:
+  Max: 10
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 350
+  CountAsOne:
+    - 'array'
+    - 'hash'
+    - 'heredoc'
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 75
+
+Naming/MethodParameterName:
+  MinNameLength: 1
+
+Naming/VariableNumber:
+  AllowedIdentifiers:
+    - street_2
+
+Style/AccessorGrouping:
+  EnforcedStyle: separated
+
+Style/CaseEquality:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: true
+  RequireForNonPublicMethods: true
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+Style/IfInsideElse:
+  AllowIfModifier: true
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+
+Style/NumericLiterals:
+  Strict: true
+  MinDigits: 4
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: '[]'
+
+Style/PreferredHashMethods:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+
+Style/Send:
+  Enabled: true
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Style/SoleNestedConditional:
+  AllowModifier: true
+
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+  AllowSafeAssignment: false

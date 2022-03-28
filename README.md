@@ -6,7 +6,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'core_extension'
+gem 'rails_extensions_core'
 ```
 
 And then execute:
@@ -15,13 +15,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install core_extension
+    $ gem install rails_extensions_core
 
 
 ## Usage
 
 ```ruby
-require 'core_extension'
+require 'rails_extensions_core'
 
 true.yesno # => Yes
 true.to_bool # => true

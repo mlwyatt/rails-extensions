@@ -1,4 +1,4 @@
-# MyExtensions
+# rails-extensions
 # **WIP**
 
 ## Installation
@@ -6,7 +6,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'core-extension'
+gem 'core_extension'
 ```
 
 And then execute:
@@ -15,13 +15,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install core-extension
+    $ gem install core_extension
 
 
 ## Usage
 
 ```ruby
-require 'core-extension'
+require 'core_extension'
 
 true.yesno # => Yes
 true.to_bool # => true
@@ -40,7 +40,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/MyExtensions. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/MyExtensions/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/mlwyatt/rails-extensions. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/mlwyatt/rails-extension/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -48,4 +48,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the MyExtensions project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/MyExtensions/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the rails-extensions project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/mlwyatt/rails-extensions/blob/master/CODE_OF_CONDUCT.md).

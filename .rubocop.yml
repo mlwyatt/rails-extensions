@@ -89,10 +89,6 @@ Metrics/PerceivedComplexity:
 Naming/MethodParameterName:
   MinNameLength: 1
 
-Naming/VariableNumber:
-  AllowedIdentifiers:
-    - street_2
-
 Style/AccessorGrouping:
   EnforcedStyle: separated
 

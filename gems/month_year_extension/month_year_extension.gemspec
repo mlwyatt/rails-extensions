@@ -16,5 +16,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
   spec.require_paths = ['lib']
 
-  spec.add_dependency('input_extension', '0.0.3')
+  spec.add_dependency('input_extension', '0.0.5')
 end

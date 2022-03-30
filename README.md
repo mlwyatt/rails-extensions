@@ -30,8 +30,10 @@ true.to_bool # => true
 ## Development
 
 ```shell
-rake gems # Will build all gems
+rake build_gems # Will build all gems
 rake install_gems # Will install all gems
+rake publish_gems # Will publish all gems to RubyGems
+rake create_gem gem_name=my_gem # Will create a new gem named my_gem in /gems (copies core folder)
 ```
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

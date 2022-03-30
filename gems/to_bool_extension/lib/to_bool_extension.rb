@@ -1,22 +1,36 @@
 # frozen_string_literal: true
 
-class TrueClass
+TrueClass.class_eval do
   # :nodoc:
   def to_bool
     true
   end
 end
 
-class FalseClass
+FalseClass.class_eval do
   # :nodoc:
   def to_bool
     false
   end
 end
 
-class NilClass
+NilClass.class_eval do
   # :nodoc:
   def to_bool
     false
+  end
+end
+
+String.class_eval do
+  # :nodoc:
+  def to_bool
+    match?(/^(true|1|t|y|yes)$/i)
+  end
+end
+
+Numeric.class_eval do
+  # :nodoc:
+  def to_bool
+    to_s.to_bool
   end
 end

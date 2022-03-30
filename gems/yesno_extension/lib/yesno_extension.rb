@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-class TrueClass
+TrueClass.class_eval do
   # :nodoc:
   def yesno
     'Yes'
   end
 end
 
-class FalseClass
+FalseClass.class_eval do
   # :nodoc:
   def yesno
     'No'
   end
 end
 
-class NilClass
+NilClass.class_eval do
   # :nodoc:
   def yesno
     'N/A'

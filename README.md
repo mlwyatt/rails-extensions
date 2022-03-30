@@ -27,6 +27,10 @@ true.yesno # => Yes
 true.to_bool # => true
 ```
 
+### Note:
+
+Some gems are only meant to be used in a `rails` environment
+
 ## Development
 
 ```shell

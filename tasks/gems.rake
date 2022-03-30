@@ -48,6 +48,8 @@ task 'publish_gems' do
     gem_name = File.basename(gem_dir)
     Dir.chdir(gem_dir) do
       version = File.read('VERSION').strip
+      next unless File.exist?("#{current_directory}/#{gem_name}-#{version}.gem")
+
       sh("gem push #{current_directory}/#{gem_name}-#{version}.gem")
     end
   end
@@ -58,20 +60,33 @@ task 'version_bump' do
   bump_major = ENV.fetch('bump_major', '') == '1'
   bump_minor = ENV.fetch('bump_minor', '') == '1'
   bump_patch = ENV.fetch('bump_patch', '') == '1'
-  only_gems = ENV.fetch('gem_names', '').split(',')
-  Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
-    gem_name = File.basename(gem_dir)
-    it_matches = only_gems.empty?
-    it_matches ||= only_gems.any? { |og| gem_name.match?(/#{og}/i) }
-    next unless it_matches
 
-    Dir.chdir(gem_dir) do
-      versions = File.read('VERSION').strip.split('.').map(&:to_i)
-      versions[0] += 1 if bump_major
-      versions[1] += 1 if bump_minor
-      versions[2] += 1 if bump_patch
-      File.write('VERSION', "#{versions.join('.')}\n")
+  if bump_major || bump_minor || bump_patch
+    only_gems = ENV.fetch('gem_names', '').split(',')
+    Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
+      gem_name = File.basename(gem_dir)
+      it_matches = only_gems.empty?
+      it_matches ||= only_gems.any? { |og| gem_name.match?(/#{og}/i) }
+      next unless it_matches
+
+      Dir.chdir(gem_dir) do
+        versions = File.read('VERSION').strip.split('.').map(&:to_i)
+        versions[0] += 1 if bump_major
+        versions[1] += 1 if bump_minor
+        versions[2] += 1 if bump_patch
+        File.write('VERSION', "#{versions.join('.')}\n")
+      end
     end
+  end
+end
+
+desc 'Copies core changelog to all gems'
+task 'copy_changelog' do
+  core_changelog = "#{GEMS_DIR}/rails_extensions_core/CHANGELOG.md"
+  Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
+    next if gem_dir.match?(/core/)
+
+    sh("cp #{core_changelog} #{gem_dir}/")
   end
 end
 

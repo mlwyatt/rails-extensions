@@ -31,6 +31,7 @@ task 'install_gems' do
     end
   end
 end
+
 desc 'Uninstalls local gems'
 task 'uninstall_gems' do
   Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|

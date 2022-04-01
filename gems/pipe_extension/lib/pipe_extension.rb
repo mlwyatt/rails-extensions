@@ -7,3 +7,9 @@ Array.class_eval do
     map { |a| fns.reduce(a, &:send) }
   end
 end
+
+Set.class_eval do
+  extend Forwardable
+
+  def_delegators :to_a, :pipe
+end

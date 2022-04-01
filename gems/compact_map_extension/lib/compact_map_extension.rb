@@ -14,3 +14,10 @@ Array.class_eval do
     r
   end
 end
+
+
+Set.class_eval do
+  extend Forwardable
+
+  def_delegators :to_a, :compact_map
+end

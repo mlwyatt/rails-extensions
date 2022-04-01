@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['Marcus Wyatt']
   spec.email = ['mwyatt@brandsinsurance.com']
 
-  spec.summary = 'Adds `to_or_sentence` to `Array`'
+  spec.summary = 'Adds `to_or_sentence` to `Array` and `Set`'
   spec.homepage = 'https://github.com/mlwyatt/rails-extensions'
   spec.license = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 3.0.1')

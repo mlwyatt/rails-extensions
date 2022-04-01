@@ -6,3 +6,9 @@ Array.class_eval do
     to_sentence(two_words_connector: ' or ', last_word_connector: ', or ')
   end
 end
+
+Set.class_eval do
+  extend Forwardable
+
+  def_delegators :to_a, :to_or_sentence
+end

@@ -1,58 +1,73 @@
 # frozen_string_literal: true
 
+# :nodoc:
+def build_gem(gem_dir)
+  Dir.chdir(gem_dir) do
+    sh("gem build #{File.basename(gem_dir)}.gemspec")
+  end
+end
+
+# :nodoc:
+def read_version(gem_dir)
+  File.read("#{gem_dir}/VERSION").strip
+end
+
+# :nodoc:
+def process_gem?(gem_dir, only_gems)
+  only_gems.empty? || only_gems.any? { |og| File.basename(gem_dir).match?(/#{og}/i) }
+end
+
+# :nodoc:
+def before_install_push(gem_dir, only_gems)
+  return false unless process_gem?(gem_dir, only_gems)
+
+  unless File.exist?("#{gem_dir}/#{File.basename(gem_dir)}-#{read_version(gem_dir)}.gem")
+    build_gem(gem_dir)
+  end
+
+  return true
+end
+
 desc 'Builds service gems'
 task 'build_gems' do
   only_gems = ENV.fetch('gem_names', '').split(',')
-  current_directory = FileUtils.pwd
   Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
-    gem_name = File.basename(gem_dir)
-    it_matches = only_gems.empty?
-    it_matches ||= only_gems.any? { |og| gem_name.match?(/#{og}/i) }
-    next unless it_matches
+    next unless process_gem?(gem_dir, only_gems)
 
-    Dir.chdir(gem_dir) do
-      version = File.read('VERSION').strip
-      sh("gem build #{gem_name}.gemspec")
-      FileUtils.mv("#{gem_name}-#{version}.gem", current_directory)
-    end
+    build_gem(gem_dir)
   end
 end
 
 desc 'Installs local gems'
 task 'install_gems' do
-  current_directory = FileUtils.pwd
+  only_gems = ENV.fetch('gem_names', '').split(',')
   Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
     next if gem_dir.match?(/core/)
+    next unless before_install_push(gem_dir, only_gems)
 
-    gem_name = File.basename(gem_dir)
-    Dir.chdir(gem_dir) do
-      version = File.read('VERSION').strip
-      sh("gem install #{current_directory}/#{gem_name}-#{version}.gem")
-    end
+    sh("gem install #{gem_dir}/#{File.basename(gem_dir)}-#{read_version(gem_dir)}.gem")
   end
 end
 
 desc 'Uninstalls local gems'
 task 'uninstall_gems' do
+  only_gems = ENV.fetch('gem_names', '').split(',')
   Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
-    gem_name = File.basename(gem_dir)
+    next unless process_gem?(gem_dir, only_gems)
+
     Dir.chdir(gem_dir) do
-      sh("gem uninstall #{gem_name} -a --ignore-dependencies")
+      sh("gem uninstall #{File.basename(gem_dir)} -a --ignore-dependencies")
     end
   end
 end
 
 desc 'Installs local gems'
 task 'publish_gems' do
-  current_directory = FileUtils.pwd
+  only_gems = ENV.fetch('gem_names', '').split(',')
   Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
-    gem_name = File.basename(gem_dir)
-    Dir.chdir(gem_dir) do
-      version = File.read('VERSION').strip
-      next unless File.exist?("#{current_directory}/#{gem_name}-#{version}.gem")
+    next unless before_install_push(gem_dir, only_gems)
 
-      sh("gem push #{current_directory}/#{gem_name}-#{version}.gem")
-    end
+    sh("gem push #{gem_dir}/#{File.basename(gem_dir)}-#{read_version(gem_dir)}.gem")
   end
 end
 
@@ -65,29 +80,16 @@ task 'version_bump' do
   if bump_major || bump_minor || bump_patch
     only_gems = ENV.fetch('gem_names', '').split(',')
     Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
-      gem_name = File.basename(gem_dir)
-      it_matches = only_gems.empty?
-      it_matches ||= only_gems.any? { |og| gem_name.match?(/#{og}/i) }
-      next unless it_matches
+      next unless process_gem?(gem_dir, only_gems)
 
       Dir.chdir(gem_dir) do
-        versions = File.read('VERSION').strip.split('.').map(&:to_i)
+        versions = read_version(gem_dir).split('.').map(&:to_i)
         versions[0] += 1 if bump_major
         versions[1] += 1 if bump_minor
         versions[2] += 1 if bump_patch
         File.write('VERSION', "#{versions.join('.')}\n")
       end
     end
-  end
-end
-
-desc 'Copies core changelog to all gems'
-task 'copy_changelog' do
-  core_changelog = "#{GEMS_DIR}/rails_extensions_core/CHANGELOG.md"
-  Dir.glob("#{GEMS_DIR}/*").each do |gem_dir|
-    next if gem_dir.match?(/core/)
-
-    sh("cp #{core_changelog} #{gem_dir}/")
   end
 end
 

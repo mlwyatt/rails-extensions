@@ -13,3 +13,5 @@
 .rspec_status
 
 .ruby-version
+.irbrc
+.irb_history

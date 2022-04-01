@@ -15,7 +15,6 @@ Array.class_eval do
   end
 end
 
-
 Set.class_eval do
   extend Forwardable
 

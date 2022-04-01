@@ -3,6 +3,12 @@
 Array.class_eval do
   # @return [Boolean]
   def overlaps?(other)
-    (self & Array(other)).present?
+    !(self & Array(other)).empty?
   end
+end
+
+Set.class_eval do
+  extend Forwardable
+
+  def_delegators :to_a, :overlaps?
 end

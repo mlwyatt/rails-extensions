@@ -16,9 +16,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
   spec.require_paths = ['lib']
 
-  spec.add_dependency('configurations', '2.2.2')
-
-  spec.add_dependency('logger_cycle_extension', '0.0.1')
   spec.add_dependency('compact_map_extension', '0.0.6')
   spec.add_dependency('current_day_extension', '0.0.5')
   spec.add_dependency('current_month_extension', '0.0.5')

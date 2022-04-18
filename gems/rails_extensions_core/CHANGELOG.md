@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+0.0.10 (2022-04-18)
+------------------
+
+* Add method to list config options
+
+0.0.9 (2022-04-15)
+------------------
+
+* Configurations weren't working
+
+0.0.8 (2022-04-14)
+------------------
+
+* Added `logger_cycle_extension`
+
 0.0.7 (2022-04-01)
 ------------------
 

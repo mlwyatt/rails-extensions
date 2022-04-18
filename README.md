@@ -22,14 +22,39 @@ Or install it yourself as:
 
 ```ruby
 require 'rails_extensions_core'
+RailsExtensions.require_gems
 
 true.yesno # => Yes
 true.to_bool # => true
 ```
 
+## Configuration
+```ruby
+require 'rails_extensions_core'
+
+true.yesno # => NoMethodError
+true.to_bool # => NoMethodError
+
+RailsExtensions.configure do |c|
+  c.include_yesno = false
+end
+
+true.yesno # => NoMethodError
+true.to_bool # => NoMethodError
+
+RailsExtensions.require_gems
+
+true.yesno # => NoMethodError
+true.to_bool # => true
+```
+
+See `RailsExtensions.configuration_flags` for all configuration flags. All are default true
+
 ### Note:
 
-Some gems are only meant to be used in a `rails` environment
+Some gems are only meant to be used in a `rails` environment.
+You must call `RailsExtensions.require_gems` before any extension is loaded
+
 
 ## Development
 

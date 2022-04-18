@@ -22,6 +22,13 @@ module RailsExtensions
     yield(configuration)
   end
 
+  # @return [Array<Symbol>]
+  def configuration_flags
+    CONFIGURATION.members
+  end
+
+  module_function :configuration_flags
+
   private
 
     # @return [Symbol] the flag name

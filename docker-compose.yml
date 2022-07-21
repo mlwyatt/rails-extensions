@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  gems:
+    build: .
+    image: "gems:${GEMS_MAJOR:-0}.${GEMS_MINOR:-1}.${GEMS_PATCH:-0}"
+    volumes:
+      - .:/GEMS
+    tty: true
+    stdin_open: true
+    command: irb
